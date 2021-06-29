@@ -2,7 +2,7 @@ class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
-  head 'https://github.com/wearedevx/keystone.git', branch: 'develop', using: 'git'
+  head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   sha256 '4dbe8faff569b8992ee091a207367604db468648503e5e6679a4c89e0918d525'
 
   depends_on 'openssl'
