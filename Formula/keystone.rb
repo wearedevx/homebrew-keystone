@@ -34,17 +34,17 @@ class Keystone < Formula
     clientPkg = "#{packagePrefix}/pkg/client"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X #{clientPkg}.ApiURL=https://develop---keystone-server-esk4nrfqlq-oa.a.run.app"
-    ghClientIdFlag = "-X #{authPkg}.githubClientId=d253d9fe1adf31b932e9"
-    ghClientSecretFlag = "-X #{authPkg}.githubClientSecret=3b58f72d1f255330ac9079061e6bbb5649ca02c1"
-    glClientIdFlag = "-X #{authPkg}.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78"
-    glClientSecretFlag = "-X #{authPkg}.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://develop---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    ghClientIdFlag = "-X '#{authPkg}.githubClientId=d253d9fe1adf31b932e9'"
+    ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=3b58f72d1f255330ac9079061e6bbb5649ca02c1'"
+    glClientIdFlag = "-X '#{authPkg}.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78'"
+    glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650'"
 
     Dir.chdir 'cli' do
       system(Formula['go'].bin + 'go',
              'build',
-             '-ldflags',
-             "\"#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}\"",
+             "-ldflags",
+             "#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
     end

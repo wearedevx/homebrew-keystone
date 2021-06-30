@@ -34,17 +34,17 @@ class Keystone < Formula
     clientPkg = "#{packagePrefix}/pkg/client"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X #{clientPkg}.ApiURL=<%KS_API_URL%>"
-    ghClientIdFlag = "-X #{authPkg}.githubClientId=<%GITHUB_CLIENT_ID%>"
-    ghClientSecretFlag = "-X #{authPkg}.githubClientSecret=<%GITHUB_CLIENT_SECRET%>"
-    glClientIdFlag = "-X #{authPkg}.gitlabClientId=<%GITLAB_CLIENT_ID%>"
-    glClientSecretFlag = "-X #{authPkg}.gitlabClientSecret=<%GITLAB_CLIENT_SECRET%>"
+    apiFlag = "-X '#{clientPkg}.ApiURL=<%KS_API_URL%>'"
+    ghClientIdFlag = "-X '#{authPkg}.githubClientId=<%GITHUB_CLIENT_ID%>'"
+    ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=<%GITHUB_CLIENT_SECRET%>'"
+    glClientIdFlag = "-X '#{authPkg}.gitlabClientId=<%GITLAB_CLIENT_ID%>'"
+    glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=<%GITLAB_CLIENT_SECRET%>'"
 
     Dir.chdir 'cli' do
       system(Formula['go'].bin + 'go',
              'build',
              '-ldflags',
-             "\"#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}\"",
+             "#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
     end
