@@ -43,7 +43,8 @@ class Keystone < Formula
     Dir.chdir 'cli' do
       system(Formula['go'].bin + 'go',
              'build',
-             "-ldflags \"#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}\"",
+             '-ldflags',
+             "\"#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}\"",
              '-o',
              'ks')
     end
