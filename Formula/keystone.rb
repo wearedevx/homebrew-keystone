@@ -3,7 +3,7 @@ class Keystone < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/develop.tar.gz'
-  sha256 'c4c74dcaaf24401c73d688f0e53c47687080324f6ae60609d16a5dd1f7288da6'
+  sha256 'e121129b13ad3e9e7d955f4efe34c7731d5719ca378d251c3d1e3473b7a8259c'
   version 'develop'
 
   depends_on 'openssl'
@@ -31,7 +31,16 @@ class Keystone < Formula
     system 'ls', "#{prefix}/include"
 
     Dir.chdir 'cli' do
-      system Formula['go'].bin + 'go', 'build', '-ldflags' , "-X github.com/wearedevx/keystone/cli/pkg/client.ApiURL=#{ENV['KS_API_URL']}", '-o', 'ks'
+      system(Formula['go'].bin + 'go',
+             'build',
+             '-ldflags' ,
+             "-X github.com/wearedevx/keystone/cli/pkg/client.ApiURL=#{ENV['KS_API_URL']}",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientId=d253d9fe1adf31b932e9",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientSecret=",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650",
+             '-o',
+             'ks')
     end
 
     bin.install "cli/ks" => "ks"
