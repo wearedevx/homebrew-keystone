@@ -3,7 +3,7 @@ class Keystone < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/develop.tar.gz'
-  sha256 'e121129b13ad3e9e7d955f4efe34c7731d5719ca378d251c3d1e3473b7a8259c'
+  sha256 '941bde4159a7c019fddfc4480bb3c9be6d1d46c526bf70a86791ec1fc555f836'
   version 'develop'
 
   depends_on 'openssl'
@@ -36,7 +36,7 @@ class Keystone < Formula
              '-ldflags' ,
              "-X github.com/wearedevx/keystone/cli/pkg/client.ApiURL=#{ENV['KS_API_URL']}",
              "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientId=d253d9fe1adf31b932e9",
-             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientSecret=",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientSecret=3b58f72d1f255330ac9079061e6bbb5649ca02c1",
              "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78",
              "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650",
              '-o',
