@@ -3,7 +3,7 @@ class Keystone < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 'fcdc9380906e5c150c58d2e65c3fe66cb1688f59ec2249e517fa198b7174f5cf'
+  sha256 'a21c23116e8ccafa64db08e3002914a0a8f279aa375de43b0221a0b5a5c4bb1e'
   version 'develop'
 
   depends_on 'openssl'
@@ -43,7 +43,7 @@ class Keystone < Formula
     Dir.chdir 'cli' do
       system(Formula['go'].bin + 'go',
              'build',
-             "-ldflags",
+             '-ldflags',
              "#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
