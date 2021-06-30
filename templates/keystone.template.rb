@@ -31,7 +31,16 @@ class Keystone < Formula
     system 'ls', "#{prefix}/include"
 
     Dir.chdir 'cli' do
-      system Formula['go'].bin + 'go', 'build', '-ldflags' , "-X github.com/wearedevx/keystone/cli/pkg/client.ApiURL=#{ENV['KS_API_URL']}", '-o', 'ks'
+      system(Formula['go'].bin + 'go',
+             'build',
+             '-ldflags' ,
+             "-X github.com/wearedevx/keystone/cli/pkg/client.ApiURL=#{ENV['KS_API_URL']}",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientId=<%GITHUB_CLIENT_ID%>",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientSecret=<%GITHUB_CLIENT_SECRET%>",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientId=<%GITLAB_CLIENT_ID%>",
+             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientSecret=<%GITLAB_CLIENT_SECRET%>",
+             '-o',
+             'ks')
     end
 
     bin.install "cli/ks" => "ks"
