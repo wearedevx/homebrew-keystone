@@ -12,6 +12,6 @@ sha256=$(sha256sum "${TMP_DIR}/keystone.tar.gz" | awk '{print $1}')
 
 cp -f $PWD/templates/keystone.template.rb $PWD/Formula/keystone.rb
 
-gsed -i "s/<%BRANCH%>/${branch}/g" "$PWD/Formula/keystone.rb"
-gsed -i "s#<%KS_API_URL%>#${ksapi_url}#g" "$PWD/Formula/keystone.rb"
-gsed -i "s/<%CHECKSUM%>/${sha256}/g" "$PWD/Formula/keystone.rb"
+sed -i "s/<%BRANCH%>/${branch}/g" "$PWD/Formula/keystone.rb"
+sed -i "s#<%KS_API_URL%>#${ksapi_url}#g" "$PWD/Formula/keystone.rb"
+sed -i "s/<%CHECKSUM%>/${sha256}/g" "$PWD/Formula/keystone.rb"
