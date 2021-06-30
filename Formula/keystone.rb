@@ -31,8 +31,8 @@ class Keystone < Formula
     system 'ls', "#{prefix}/include"
 
     packagePrefix = "github.com/wearedevx/keystone/cli"
-    clientPkg = "#{packagePrefix}/client"
-    authPkg = "#{packagePrefix}/client/auth"
+    clientPkg = "#{packagePrefix}/pkg/client"
+    authPkg = "#{packagePrefix}/pkg/client/auth"
 
     apiFlag = "-X #{clientPkg}.ApiURL=https://develop---keystone-server-esk4nrfqlq-oa.a.run.app"
     ghClientIdFlag = "-X #{authPkg}.githubClientId=d253d9fe1adf31b932e9"
