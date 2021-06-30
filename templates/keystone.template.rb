@@ -30,15 +30,21 @@ class Keystone < Formula
 
     system 'ls', "#{prefix}/include"
 
+    packagePrefix = "github.com/wearedevx/keystone/cli"
+    clientPkg = "#{packagePrefix}/client"
+    authPkg = "#{packagePrefix}/client/auth"
+
+    apiFlag = "-X #{clientPkg}.ApiURL=<%KS_API_URL%>"
+    ghClientIdFlag = "-X #{authPkg}.githubClientId=<%GITHUB_CLIENT_ID%>"
+    ghClientSecretFlag = "-X #{authPkg}.githubClientSecret=<%GITHUB_CLIENT_SECRET%>"
+    glClientIdFlag = "-X #{authPkg}.gitlabClientId=<%GITLAB_CLIENT_ID%>"
+    glClientSecretFlag = "-X #{authPkg}.gitlabClientSecret=<%GITLAB_CLIENT_SECRET%>"
+
     Dir.chdir 'cli' do
       system(Formula['go'].bin + 'go',
              'build',
-             '-ldflags' ,
-             "-X github.com/wearedevx/keystone/cli/pkg/client.ApiURL=#{ENV['KS_API_URL']}",
-             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientId=<%GITHUB_CLIENT_ID%>",
-             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.githubClientSecret=<%GITHUB_CLIENT_SECRET%>",
-             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientId=<%GITLAB_CLIENT_ID%>",
-             "-X github.com/wearedevx/keystone/cli/pkg/client/auth.gitlabClientSecret=<%GITLAB_CLIENT_SECRET%>",
+             '-ldflags',
+             "#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
     end
