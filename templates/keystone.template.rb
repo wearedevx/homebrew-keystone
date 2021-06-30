@@ -2,7 +2,7 @@ class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: '<%BRANCH%>'
-  url 'https://github.com/wearedevx/keystone/<%BRANCH%>.tar.gz'
+  url 'https://github.com/wearedevx/keystone/archive/<%BRANCH%>.tar.gz'
   sha256 '<%CHECKSUM%>'
   version '<%BRANCH%>'
 
