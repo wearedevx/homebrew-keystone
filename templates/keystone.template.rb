@@ -1,9 +1,10 @@
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
-  url 'https://github.com/wearedevx/keystone/develop.tar.gz'
-  sha256 '9c219f33f7632182402d24cfecdf15130721baef26d69ac25378c54765d3041b'
+  head 'https://github.com/wearedevx/keystone.git', branch: '<%BRANCH%>'
+  url 'https://github.com/wearedevx/keystone/<%BRANCH%>.tar.gz'
+  sha256 '<%CHECKSUM%>'
+  version '<%BRANCH%>'
 
   depends_on 'openssl'
   depends_on 'go'
@@ -25,7 +26,7 @@ class Keystone < Formula
     ENV['CGO_ENABLED'] = '1'
     ENV['CGO_LDFLAGS'] = "-L#{prefix}/lib"
     ENV['CGO_CFLAGS'] = "-I#{prefix}/include"
-    ENV['KS_API_URL'] = "http://localhost:9001"
+    ENV['KS_API_URL'] = "<%KS_API_URL%>"
 
     system 'ls', "#{prefix}/include"
 
