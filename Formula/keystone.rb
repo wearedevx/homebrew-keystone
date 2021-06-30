@@ -3,7 +3,8 @@ class Keystone < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/develop.tar.gz'
-  sha256 '9c219f33f7632182402d24cfecdf15130721baef26d69ac25378c54765d3041b'
+  sha256 'c4c74dcaaf24401c73d688f0e53c47687080324f6ae60609d16a5dd1f7288da6'
+  version 'develop'
 
   depends_on 'openssl'
   depends_on 'go'
@@ -36,5 +37,4 @@ class Keystone < Formula
     bin.install "cli/ks" => "ks"
   end
 end
-
 
