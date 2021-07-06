@@ -10,6 +10,36 @@ wget "https://github.com/wearedevx/keystone/archive/${branch}.tar.gz" \
 
 sha256=$(sha256sum "${TMP_DIR}/keystone.tar.gz" | awk '{print $1}')
 
+if [ $KS_API_URL == "" ]; then
+	echo 'No valid API Url'
+	exit 1
+fi
+
+if [ $BRANCH == "" ]; then
+	echo 'Invalid branch'
+	exit 1
+fi
+
+if [ $GITHUB_CLIENT_ID == '' ]; then
+	echo 'Invalid Github client id'
+	exit 1
+fi
+
+if [ $GITHUB_CLIENT_SECRET == '' ]; then
+	echo 'Invalid Github client secret'
+	exit 1
+fi
+
+if [ $GITLAB_CLIENT_ID == '' ]; then
+	echo 'Invalid GitLab client id'
+	exit 1
+fi
+
+if [ $GITLAB_CLIENT_SECRET == '' ]; then
+	echo 'Invalid GitLaab client secret'
+	exit 1
+fi
+
 function apply_template() {
 	suffix=$1
 	if [ $suffix != "" ]; then
