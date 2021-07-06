@@ -41,6 +41,10 @@ if [ $GITLAB_CLIENT_SECRET == '' ]; then
 fi
 
 function apply_template() {
+	if [[ -z $SED ]]; then
+		SED=sed		 
+	fi
+
 	suffix=$1
 	if [ $suffix != "" ]; then
 		suffix="@${suffix}"
