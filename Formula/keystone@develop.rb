@@ -3,7 +3,7 @@ class Keystone < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 'a047f65dbbeb380112c1ae59bba9f0a530782e3318e75442104ee484bf3b9fed'
+  sha256 '3613356f9c523f7ed064e7a3a46708eb845eed6108c5d67b8cce16f14a0b811b'
   version 'develop'
 
   depends_on 'openssl'
@@ -26,7 +26,7 @@ class Keystone < Formula
     ENV['CGO_ENABLED'] = '1'
     ENV['CGO_LDFLAGS'] = "-L#{prefix}/lib"
     ENV['CGO_CFLAGS'] = "-I#{prefix}/include"
-    ENV['KS_API_URL'] = ""
+    ENV['KS_API_URL'] = "https://develop---keystone-server-esk4nrfqlq-oa.a.run.app"
 
     system 'ls', "#{prefix}/include"
 
@@ -34,7 +34,7 @@ class Keystone < Formula
     clientPkg = "#{packagePrefix}/pkg/client"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL='"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://develop---keystone-server-esk4nrfqlq-oa.a.run.app'"
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=d253d9fe1adf31b932e9'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=3b58f72d1f255330ac9079061e6bbb5649ca02c1'"
     glClientIdFlag = "-X '#{authPkg}.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78'"
