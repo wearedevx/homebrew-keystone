@@ -1,10 +1,10 @@
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
-  url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 '4d44e117cda7656179a85e8cd5cfd5fa44d3c4582d19db38650f86544c59f2c9'
-  version 'develop'
+  head 'https://github.com/wearedevx/keystone.git', branch: ''
+  url 'https://github.com/wearedevx/keystone/archive/.tar.gz'
+  sha256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+  version ''
 
   depends_on 'openssl'
   depends_on 'go'
