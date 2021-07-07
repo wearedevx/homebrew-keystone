@@ -26,15 +26,19 @@ class Keystone < Formula
     ENV['CGO_ENABLED'] = '1'
     ENV['CGO_LDFLAGS'] = "-L#{prefix}/lib"
     ENV['CGO_CFLAGS'] = "-I#{prefix}/include"
-    ENV['KS_API_URL'] = "<%KS_API_URL%>"
 
     system 'ls', "#{prefix}/include"
 
     packagePrefix = "github.com/wearedevx/keystone/cli"
     clientPkg = "#{packagePrefix}/pkg/client"
+    constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=<%KS_API_URL%>'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=<%KSAPI_URL%>'"
+    authProxyFlag = "-X '#{authPkg}.authRedirectURL=<%AUTH_PROXY%>'"
+
+    versionFlag = "-X '#{constantsPkg}.Version=<%VERSION%>'"
+
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=<%GITHUB_CLIENT_ID%>'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=<%GITHUB_CLIENT_SECRET%>'"
     glClientIdFlag = "-X '#{authPkg}.gitlabClientId=<%GITLAB_CLIENT_ID%>'"
@@ -44,7 +48,7 @@ class Keystone < Formula
       system(Formula['go'].bin + 'go',
              'build',
              '-ldflags',
-             "#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
+             "#{apiFlag} #{authProxyFlag} #{versionFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
     end
