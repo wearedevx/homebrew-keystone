@@ -46,7 +46,7 @@ function apply_template() {
 	fi
 
 	suffix=$1
-	if [ $suffix != "" ]; then
+	if [ "$suffix" != "" ]; then
 		suffix="@${suffix}"
 	fi
 
