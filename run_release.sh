@@ -7,38 +7,38 @@ wget "https://github.com/wearedevx/keystone/archive/${BRANCH}.tar.gz" \
 
 sha256=$(sha256sum "${TMP_DIR}/keystone.tar.gz" | awk '{print $1}')
 
-if [ $KS_API_URL == "" ]; then
+if [ "$KSAPI_URL" == "" ]; then
 	echo 'No valid API Url'
 	exit 1
 fi
 
-if [ $BRANCH == "" ]; then
+if [ "$BRANCH" == "" ]; then
 	echo 'Invalid branch'
 	exit 1
 fi
 
-if [ $GITHUB_CLIENT_ID == '' ]; then
+if [ "$GITHUB_CLIENT_ID" == '' ]; then
 	echo 'Invalid Github client id'
 	exit 1
 fi
 
-if [ $GITHUB_CLIENT_SECRET == '' ]; then
+if [ "$GITHUB_CLIENT_SECRET" == '' ]; then
 	echo 'Invalid Github client secret'
 	exit 1
 fi
 
-if [ $GITLAB_CLIENT_ID == '' ]; then
+if [ "$GITLAB_CLIENT_ID" == '' ]; then
 	echo 'Invalid GitLab client id'
 	exit 1
 fi
 
-if [ $GITLAB_CLIENT_SECRET == '' ]; then
+if [ "$GITLAB_CLIENT_SECRET" == '' ]; then
 	echo 'Invalid GitLaab client secret'
 	exit 1
 fi
 
 function apply_template() {
-	if [[ -z $SED ]]; then
+	if [[ -z "$SED" ]]; then
 		SED=sed		 
 	fi
 
@@ -54,7 +54,7 @@ function apply_template() {
 	$SED -i "s/<%BRANCH%>/${BRANCH}/g" $target
 	$SED -i "s/<%VERSION%>/${VERSION}/g" $target
 
-	$SED -i "s#<%KS_API_URL%>#${KSAPI_URL}#g" $target
+	$SED -i "s#<%KSAPI_URL%>#${KSAPI_URL}#g" $target
 	$SED -i "s#<%AUTH_PROXY%>#${AUTH_PROXY}#g" $target
 
 	$SED -i "s/<%CHECKSUM%>/${sha256}/g" $target
@@ -66,7 +66,7 @@ function apply_template() {
 
 # Latest
 # Only if it is not a develop release
-if [ $BRANCH != "develop" ]; then
+if [ "$BRANCH" != "develop" ]; then
 	apply_template ""
 fi
 
