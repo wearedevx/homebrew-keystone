@@ -1,10 +1,10 @@
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: '0.1.8'
-  url 'https://github.com/wearedevx/keystone/archive/0.1.8.tar.gz'
-  sha256 '429f75a2052d9283be84ee71e0a366d47e281c02b8bf4a84923cfa296960fdea'
-  version '0.1.8'
+  head 'https://github.com/wearedevx/keystone.git', branch: '0.1.7}'
+  url 'https://github.com/wearedevx/keystone/archive/0.1.7}.tar.gz'
+  sha256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+  version '0.1.7}'
 
   depends_on 'openssl'
   depends_on 'go'
@@ -26,7 +26,7 @@ class Keystone < Formula
     ENV['CGO_ENABLED'] = '1'
     ENV['CGO_LDFLAGS'] = "-L#{prefix}/lib"
     ENV['CGO_CFLAGS'] = "-I#{prefix}/include"
-    ENV['KS_API_URL'] = "https://v0-1-8---keystone-server-esk4nrfqlq-oa.a.run.app"
+    ENV['KS_API_URL'] = "https://v0-1-7---keystone-server-esk4nrfqlq-oa.a.run.app"
 
     system 'ls', "#{prefix}/include"
 
@@ -34,7 +34,7 @@ class Keystone < Formula
     clientPkg = "#{packagePrefix}/pkg/client"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-1-8---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-1-7---keystone-server-esk4nrfqlq-oa.a.run.app'"
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=d253d9fe1adf31b932e9'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=3b58f72d1f255330ac9079061e6bbb5649ca02c1'"
     glClientIdFlag = "-X '#{authPkg}.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78'"
