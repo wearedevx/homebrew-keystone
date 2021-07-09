@@ -3,7 +3,7 @@ class Keystone < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 '9f9d937211e9ebadf62c89286b4c62da6bb3fc8a97a29aff8a29afb21db6745b'
+  sha256 '5d6adc9cad4bf7247387994538ea64f30712ea1b05120d076c1327b771fc063b'
   version 'develop'
 
   depends_on 'openssl'
@@ -26,15 +26,19 @@ class Keystone < Formula
     ENV['CGO_ENABLED'] = '1'
     ENV['CGO_LDFLAGS'] = "-L#{prefix}/lib"
     ENV['CGO_CFLAGS'] = "-I#{prefix}/include"
-    ENV['KS_API_URL'] = "https://develop---keystone-server-esk4nrfqlq-oa.a.run.app"
 
     system 'ls', "#{prefix}/include"
 
     packagePrefix = "github.com/wearedevx/keystone/cli"
     clientPkg = "#{packagePrefix}/pkg/client"
+    constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
     apiFlag = "-X '#{clientPkg}.ApiURL=https://develop---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy/'"
+
+    versionFlag = "-X '#{constantsPkg}.Version=develop'"
+
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=d253d9fe1adf31b932e9'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=3b58f72d1f255330ac9079061e6bbb5649ca02c1'"
     glClientIdFlag = "-X '#{authPkg}.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78'"
@@ -44,7 +48,7 @@ class Keystone < Formula
       system(Formula['go'].bin + 'go',
              'build',
              '-ldflags',
-             "#{apiFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
+             "#{apiFlag} #{authProxyFlag} #{versionFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
     end
