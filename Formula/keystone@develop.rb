@@ -8,6 +8,7 @@ class Keystone < Formula
 
   depends_on 'openssl'
   depends_on 'go'
+  depends_on 'libsodium'
 
   def install_themis
     system 'git', 'clone', 'https://github.com/cossacklabs/themis.git'
