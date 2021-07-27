@@ -42,7 +42,12 @@ function apply_template() {
 		SED=sed		 
 	fi
 
-	target="$PWD/Formula/keystone.rb"
+	suffix=$1
+	if [ "$suffix" != "" ]; then
+		suffix="@${suffix}"
+	fi
+
+	target="$PWD/Formula/keystone${suffix}.rb"
 
 	cp -f $PWD/templates/keystone.template.rb $target
 
@@ -59,5 +64,13 @@ function apply_template() {
 	$SED -i "s/<%GITLAB_CLIENT_SECRET%>/${GITLAB_CLIENT_SECRET}/g" $target
 }
 
-apply_template
+# Latest
+# Only if it is not a develop release
+if [ "$BRANCH" != "develop" ]; then
+	apply_template ""
+fi
 
+# Versioned
+# So that a user can install a specific
+# keystone version
+apply_template $BRANCH
