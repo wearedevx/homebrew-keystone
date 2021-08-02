@@ -52,7 +52,7 @@ function apply_template() {
 
 	# Using "develop" as a version name is invalid for Homebrew,
 	# so let’s make a separate formula for the develop version
-	if [ "$suffix" == "develop" ]; then
+	if [ "$1" == "develop" ]; then
 		target="$PWD/Formula/keystone-develop.rb"
 		class_name="KeystoneDevelop"
 	else
