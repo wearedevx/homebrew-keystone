@@ -42,12 +42,21 @@ function apply_template() {
 		SED=sed		 
 	fi
 
-	suffix=$1
+	# Homebrew considers versions with the path segment
+	# to be invalid, so let’s remove it
+	suffix=$(echo "$1" | $SED "s/\(\.[[:digit:]]\+\)$//g")
+
 	if [ "$suffix" != "" ]; then
 		suffix="@${suffix}"
 	fi
 
-	target="$PWD/Formula/keystone${suffix}.rb"
+	# Using "develop" as a version name is invalid for Homebrew,
+	# so let’s make a separate formula for the develop version
+	if [ "$suffix" == "develop" ]; then
+		target="$PWD/Formula/keystone-develop.rb"
+	else
+		target="$PWD/Formula/keystone${suffix}.rb"
+	fi
 
 	cp -f $PWD/templates/keystone.template.rb $target
 
