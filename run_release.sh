@@ -54,12 +54,15 @@ function apply_template() {
 	# so let’s make a separate formula for the develop version
 	if [ "$suffix" == "develop" ]; then
 		target="$PWD/Formula/keystone-develop.rb"
+		class_name="KeystoneDevelop"
 	else
 		target="$PWD/Formula/keystone${suffix}.rb"
+		class_name="Keystone"
 	fi
 
 	cp -f $PWD/templates/keystone.template.rb $target
 
+	$SED -i "s/CLASS/${class_name}/g" $target
 	$SED -i "s/<%BRANCH%>/${BRANCH}/g" $target
 	$SED -i "s/<%VERSION%>/${VERSION}/g" $target
 
