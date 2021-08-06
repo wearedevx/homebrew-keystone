@@ -6,6 +6,9 @@ class KeystoneDevelop < Formula
   sha256 '9088b36660132a89ea24da176f895aefed853e665265e40c090c5a3de993ac62'
   version 'develop'
 
+  depends_on 'git'
+  depends_on 'llvm'
+  depends_on 'make'
   depends_on 'openssl'
   depends_on 'go'
   depends_on 'libsodium'

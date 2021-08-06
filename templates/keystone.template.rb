@@ -6,6 +6,9 @@ class CLASS < Formula
   sha256 '<%CHECKSUM%>'
   version '<%BRANCH%>'
 
+  depends_on 'git'
+  depends_on 'gcc'
+  depends_on 'make'
   depends_on 'openssl'
   depends_on 'go'
   depends_on 'libsodium'
