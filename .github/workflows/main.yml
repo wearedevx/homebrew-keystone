@@ -1,0 +1,51 @@
+name: Homebrew deploy
+
+on:
+  repository_dispatch:
+    types: [homebrew-deploy]
+
+env:
+  KSAPI_URL: ${{ github.event.client_payload.url }}
+  AUTH_PROXY: ${{ github.event.client_payload.auth_proxy }}
+  REF: ${{ github.event.client_payload.ref }}
+  TAG: ${{ github.event.client_payload.tag }}
+
+jobs:
+  homebrew-deploy:
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Load Secrets
+        uses: wearedevx/keystone-action@main
+        id: load_secrets
+        with:
+          keystone_slot_1: ${{ secrets.KEYSTONE_PROD_SLOT_1 }}
+          keystone_slot_2: ${{ secrets.KEYSTONE_PROD_SLOT_2 }}
+          keystone_slot_3: ${{ secrets.KEYSTONE_PROD_SLOT_3 }}
+          keystone_slot_4: ${{ secrets.KEYSTONE_PROD_SLOT_4 }}
+          keystone_slot_5: ${{ secrets.KEYSTONE_PROD_SLOT_5 }}
+
+      - name: Run Template
+        env:
+          BRANCH: ${{ env.TAG }}
+          #
+          KSAPI_URL: ${{ env.KSAPI_URL }}
+          AUTH_PROXY: ${{ env.AUTH_PROXY }}
+          #
+          VERSION: ${{ env.TAG }}
+          GITHUB_CLIENT_ID: ${{ env.GITHUB_CLIENT_ID }}
+          GITHUB_CLIENT_SECRET: ${{ env.GITHUB_CLIENT_SECRET }}
+          GITLAB_CLIENT_ID: ${{ env.GITLAB_CLIENT_ID }}
+          GITLAB_CLIENT_SECRET: ${{ env.GITLAB_CLIENT_SECRET }}
+        run: ./run_release.sh
+
+      - name: Push
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: "."
+          branch: main
+          default_author: github_actions
+          message: release ${{ env.TAG }}
