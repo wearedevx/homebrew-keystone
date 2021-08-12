@@ -21,8 +21,8 @@ files: []
 options:
   strict: false
 ci_services:
-- name: github-ci
-  keys:
+- name: github
+  type: github-ci
+  options:
     Owner: wearedevx
-    Project: keystone
-
+    Project: homebrew-keystone
