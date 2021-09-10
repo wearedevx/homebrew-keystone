@@ -3,7 +3,7 @@ class KeystoneDevelop < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 '2341cbe9202bfe103a08ff9e475e9c5fa59ea7a6d8d83939751835c648711144'
+  sha256 '0b6c8da1556023d3fd2ab18e5bff616fc8d07d8effe8fca1f52bbe9bd8e59de9'
   version 'develop'
 
   depends_on 'git'
@@ -38,7 +38,7 @@ class KeystoneDevelop < Formula
     constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-1-104---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://develop---keystone-server-esk4nrfqlq-oa.a.run.app'"
     authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
     versionFlag = "-X '#{constantsPkg}.Version=develop'"
