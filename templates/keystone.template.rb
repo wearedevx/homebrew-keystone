@@ -49,6 +49,9 @@ class CLASS < Formula
     glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=<%GITLAB_CLIENT_SECRET%>'"
 
     Dir.chdir 'cli' do
+      system(Formula['go'].bin + 'go', 'clean')
+      system(Formula['go'].bin + 'go', 'get')
+
       system(Formula['go'].bin + 'go',
              'build',
              '-ldflags',
