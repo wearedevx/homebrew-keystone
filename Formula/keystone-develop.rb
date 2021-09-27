@@ -3,7 +3,7 @@ class KeystoneDevelop < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 '860c1e58cc8ed1e8685fef6078dcf8875eb74675a1a5734b5eae745bebfe315a'
+  sha256 '9ab8d6abff185ce08996a0fd52865459b3909d862ce0cb615fc338b2ac46235d'
   version 'develop'
 
   depends_on 'git'
@@ -49,6 +49,9 @@ class KeystoneDevelop < Formula
     glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650'"
 
     Dir.chdir 'cli' do
+      system(Formula['go'].bin + 'go', 'clean')
+      system(Formula['go'].bin + 'go', 'get')
+
       system(Formula['go'].bin + 'go',
              'build',
              '-ldflags',
