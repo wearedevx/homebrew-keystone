@@ -9,7 +9,7 @@ class CLASS < Formula
   depends_on 'git'
   depends_on 'gcc'
   depends_on 'make'
-  depends_on 'openssl'
+  depends_on 'openssl@1.1'
   depends_on 'go'
   depends_on 'libsodium'
 
@@ -17,8 +17,8 @@ class CLASS < Formula
     system 'git', 'clone', 'https://github.com/cossacklabs/themis.git'
     Dir.chdir 'themis' do
       ENV['ENGINE'] = 'openssl'
-      ENV['ENGINE_INCLUDE_PATH'] = Formula['openssl'].include
-      ENV['ENGINE_LIB_PATH'] = Formula['openssl'].lib
+      ENV['ENGINE_INCLUDE_PATH'] = Formula['openssl@1.1'].include
+      ENV['ENGINE_LIB_PATH'] = Formula['openssl@1.1'].lib
       ENV['PREFIX'] = prefix
       system 'make', 'install'
     end
