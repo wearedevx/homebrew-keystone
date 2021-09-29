@@ -3,14 +3,14 @@ class KeystoneDevelop < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 '9ab8d6abff185ce08996a0fd52865459b3909d862ce0cb615fc338b2ac46235d'
+  sha256 '3d565c25fd66c39b89ccc84ea31e9224016d8df9bbd145cbb977d918a2f1f4ff'
   version 'develop'
 
   depends_on 'git'
   depends_on 'gcc'
   depends_on 'make'
   depends_on 'openssl@1.1'
-  depends_on 'go@1.17'
+  depends_on 'go'
   depends_on 'libsodium'
 
   def install_themis
