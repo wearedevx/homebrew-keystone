@@ -1,15 +1,15 @@
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: '0.1.114'
-  url 'https://github.com/wearedevx/keystone/archive/0.1.114.tar.gz'
-  sha256 'ec9f91334b6ab59a3ce449da60a6b2d328b75adb610e5b308a3a9abc40e1e7d6'
-  version '0.1.114'
+  head 'https://github.com/wearedevx/keystone.git', branch: '0.1.115'
+  url 'https://github.com/wearedevx/keystone/archive/0.1.115.tar.gz'
+  sha256 'df04fa9442ef251eebf6213c1dd5a6b318c2f34891b12784e7392033220c782e'
+  version '0.1.115'
 
   depends_on 'git'
   depends_on 'gcc'
   depends_on 'make'
-  depends_on 'openssl'
+  depends_on 'openssl@1.1'
   depends_on 'go'
   depends_on 'libsodium'
 
@@ -17,8 +17,8 @@ class Keystone < Formula
     system 'git', 'clone', 'https://github.com/cossacklabs/themis.git'
     Dir.chdir 'themis' do
       ENV['ENGINE'] = 'openssl'
-      ENV['ENGINE_INCLUDE_PATH'] = Formula['openssl'].include
-      ENV['ENGINE_LIB_PATH'] = Formula['openssl'].lib
+      ENV['ENGINE_INCLUDE_PATH'] = Formula['openssl@1.1'].include
+      ENV['ENGINE_LIB_PATH'] = Formula['openssl@1.1'].lib
       ENV['PREFIX'] = prefix
       system 'make', 'install'
     end
@@ -38,10 +38,10 @@ class Keystone < Formula
     constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-1-114---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-1-115---keystone-server-esk4nrfqlq-oa.a.run.app'"
     authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
-    versionFlag = "-X '#{constantsPkg}.Version=0.1.114'"
+    versionFlag = "-X '#{constantsPkg}.Version=0.1.115'"
 
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=60165e42468cf5e34aa8'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
@@ -49,6 +49,9 @@ class Keystone < Formula
     glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650'"
 
     Dir.chdir 'cli' do
+      system(Formula['go'].bin + 'go', 'clean')
+      system(Formula['go'].bin + 'go', 'get')
+
       system(Formula['go'].bin + 'go',
              'build',
              '-ldflags',
