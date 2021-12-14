@@ -6,12 +6,12 @@ class CLASS < Formula
   sha256 '<%CHECKSUM%>'
   version '<%BRANCH%>'
 
-  depends_on 'git@2.34'
-  depends_on 'gcc@11.2'
-  depends_on 'make@4.3'
+  depends_on 'git'
+  depends_on 'gcc@11'
+  depends_on 'make'
   depends_on 'openssl@1.1'
-  depends_on 'go@1.17'
-  depends_on 'libsodium@1.0'
+  depends_on 'go@1.16'
+  depends_on 'libsodium'
 
   def install_themis
     system 'git', 'clone', '--depth', '1', '--branch', '0.13.13', 'https://github.com/cossacklabs/themis.git'
@@ -49,10 +49,10 @@ class CLASS < Formula
     glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=<%GITLAB_CLIENT_SECRET%>'"
 
     Dir.chdir 'cli' do
-      system(Formula['go@1.17'].bin + 'go', 'clean')
-      system(Formula['go@1.17'].bin + 'go', 'get')
+      system(Formula['go@1.16'].bin + 'go', 'clean')
+      system(Formula['go@1.16'].bin + 'go', 'get')
 
-      system(Formula['go@1.17'].bin + 'go',
+      system(Formula['go@1.16'].bin + 'go',
              'build',
              '-ldflags',
              "#{apiFlag} #{authProxyFlag} #{versionFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
