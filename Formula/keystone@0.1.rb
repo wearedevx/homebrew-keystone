@@ -1,20 +1,20 @@
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: '0.1.129'
-  url 'https://github.com/wearedevx/keystone/archive/0.1.129.tar.gz'
-  sha256 '37801c33c34ce8e4f4d49c8791025913cd483f84d68af373bb3aa0e531cad181'
-  version '0.1.129'
+  head 'https://github.com/wearedevx/keystone.git', branch: '0.1.130'
+  url 'https://github.com/wearedevx/keystone/archive/0.1.130.tar.gz'
+  sha256 '38adcccded1a3450e5df2a2d4321a52155f652e12e35c7af113daaee67b2c942'
+  version '0.1.130'
 
   depends_on 'git'
-  depends_on 'gcc'
+  depends_on 'gcc@11'
   depends_on 'make'
   depends_on 'openssl@1.1'
-  depends_on 'go'
+  depends_on 'go@1.16'
   depends_on 'libsodium'
 
   def install_themis
-    system 'git', 'clone', 'https://github.com/cossacklabs/themis.git'
+    system 'git', 'clone', '--depth', '1', '--branch', '0.13.13', 'https://github.com/cossacklabs/themis.git'
     Dir.chdir 'themis' do
       ENV['ENGINE'] = 'openssl'
       ENV['ENGINE_INCLUDE_PATH'] = Formula['openssl@1.1'].include
@@ -38,10 +38,10 @@ class Keystone < Formula
     constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-1-129---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-1-130---keystone-server-esk4nrfqlq-oa.a.run.app'"
     authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
-    versionFlag = "-X '#{constantsPkg}.Version=0.1.129'"
+    versionFlag = "-X '#{constantsPkg}.Version=0.1.130'"
 
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=60165e42468cf5e34aa8'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
@@ -49,10 +49,10 @@ class Keystone < Formula
     glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650'"
 
     Dir.chdir 'cli' do
-      system(Formula['go'].bin + 'go', 'clean')
-      system(Formula['go'].bin + 'go', 'get')
+      system(Formula['go@1.16'].bin + 'go', 'clean')
+      system(Formula['go@1.16'].bin + 'go', 'get')
 
-      system(Formula['go'].bin + 'go',
+      system(Formula['go@1.16'].bin + 'go',
              'build',
              '-ldflags',
              "#{apiFlag} #{authProxyFlag} #{versionFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
