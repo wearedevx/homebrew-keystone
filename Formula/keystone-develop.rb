@@ -3,7 +3,7 @@ class KeystoneDevelop < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: 'develop'
   url 'https://github.com/wearedevx/keystone/archive/develop.tar.gz'
-  sha256 '99dba9db5e683e34b40b8c0c980137fc56093eecd69e59d932a913972567a15d'
+  sha256 '41e40d33252b82999009af5f303470f07f57824186bec4121008c2586dfdefdf'
   version 'develop'
 
   depends_on 'git'
