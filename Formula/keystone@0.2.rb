@@ -3,10 +3,10 @@ require 'open3'
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.20'
-  url 'https://github.com/wearedevx/keystone/archive/0.2.20.tar.gz'
-  sha256 'c7474d3388e7d8148fa687dcceacb20f10ce19d5ada87ba8e040837d280ff27c'
-  version '0.2.20'
+  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.21'
+  url 'https://github.com/wearedevx/keystone/archive/0.2.21.tar.gz'
+  sha256 'fad12260d9c05a361ac0cc1fd805b9e18db3840d1b363aa6c28cee40e262c0ef'
+  version '0.2.21'
 
   depends_on 'git'
   depends_on 'gcc@11'
@@ -56,17 +56,15 @@ class Keystone < Formula
     ENV['CGO_LDFLAGS'] = "-L#{prefix}/lib"
     ENV['CGO_CFLAGS'] = "-I#{prefix}/include"
 
-    system 'ls', "#{prefix}/include"
-
     packagePrefix = "github.com/wearedevx/keystone/cli"
     clientPkg = "#{packagePrefix}/pkg/client"
     constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-20---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-21---keystone-server-esk4nrfqlq-oa.a.run.app'"
     authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
-    versionFlag = "-X '#{constantsPkg}.Version=0.2.20'"
+    versionFlag = "-X '#{constantsPkg}.Version=0.2.21'"
 
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=60165e42468cf5e34aa8'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
@@ -89,6 +87,7 @@ class Keystone < Formula
     end
 
     bin.install "cli/ks" => "ks"
+    
   end
 end
 
