@@ -58,6 +58,19 @@ class Keystone < Formula
              "#{apiFlag} #{authProxyFlag} #{versionFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
+
+       ENV["SHELL_COMPLETIONS_DIR"] = buildpath
+
+       stdout, stderr, status = Open3.capture3('./ks', 'completion', 'zsh')
+       File.open("_ks.zsh", "w") { |f| f.write(stdout) }
+       stdout, stderr, status = Open3.capture3('./ks', 'completion', 'bash')
+       File.open("_ks.sh", "w") { |f| f.write(stdout) }
+       stdout, stderr, status = Open3.capture3('./ks', 'completion', 'fish')
+       File.open("ks.fish", "w") { |f| f.write(stdout) }
+
+       zsh_completion.install "_ks.zsh" => "_ks"
+       bash_completion.install "_ks.sh" 
+       fish_completion.install "ks.fish" 
     end
 
     bin.install "cli/ks" => "ks"
