@@ -25,6 +25,29 @@ class Keystone < Formula
       system 'make', 'install'
     end
   end
+
+  def install_completions
+     ENV["SHELL_COMPLETIONS_DIR"] = buildpath
+
+     stdout, stderr, status = Open3.capture3('./ks', 'completion', 'zsh')
+     File.open("_ks.zsh", "w") { |f| f.write(stdout) }
+     stdout, stderr, status = Open3.capture3('./ks', 'completion', 'bash')
+     File.open("_ks.sh", "w") { |f| f.write(stdout) }
+     stdout, stderr, status = Open3.capture3('./ks', 'completion', 'fish')
+     File.open("ks.fish", "w") { |f| f.write(stdout) }
+
+     zsh_completion.install "_ks.zsh" => "_ks"
+     bash_completion.install "_ks.sh" 
+     fish_completion.install "ks.fish" 
+  end
+
+  def install_manpages
+     man.mkpath
+     system('mkdir', 'man')
+     system('./ks', 'documentation', '-t', 'man', '-d', 'man')
+
+     man1.install Dir['man/*']
+  end
   
   def install
     install_themis()
@@ -61,18 +84,8 @@ class Keystone < Formula
              '-o',
              'ks')
 
-      ENV["SHELL_COMPLETIONS_DIR"] = buildpath
-
-      stdout, stderr, status = Open3.capture3('./ks', 'completion', 'zsh')
-      File.open("_ks.zsh", "w") { |f| f.write(stdout) }
-      stdout, stderr, status = Open3.capture3('./ks', 'completion', 'bash')
-      File.open("_ks.sh", "w") { |f| f.write(stdout) }
-      stdout, stderr, status = Open3.capture3('./ks', 'completion', 'fish')
-      File.open("_ks.fish", "w") { |f| f.write(stdout) }
-
-      zsh_completion.install "_ks.zsh" => "_ks"
-      bash_completion.install "_ks.sh" 
-      fish_completion.install "_ks.fish"
+      install_completions()
+      install_manpages()
     end
 
     bin.install "cli/ks" => "ks"

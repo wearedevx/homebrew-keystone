@@ -1,3 +1,5 @@
+require 'open3'
+
 class KeystoneDevelop < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
@@ -22,6 +24,29 @@ class KeystoneDevelop < Formula
       ENV['PREFIX'] = prefix
       system 'make', 'install'
     end
+  end
+
+  def install_completions
+     ENV["SHELL_COMPLETIONS_DIR"] = buildpath
+
+     stdout, stderr, status = Open3.capture3('./ks', 'completion', 'zsh')
+     File.open("_ks.zsh", "w") { |f| f.write(stdout) }
+     stdout, stderr, status = Open3.capture3('./ks', 'completion', 'bash')
+     File.open("_ks.sh", "w") { |f| f.write(stdout) }
+     stdout, stderr, status = Open3.capture3('./ks', 'completion', 'fish')
+     File.open("ks.fish", "w") { |f| f.write(stdout) }
+
+     zsh_completion.install "_ks.zsh" => "_ks"
+     bash_completion.install "_ks.sh" 
+     fish_completion.install "ks.fish" 
+  end
+
+  def install_manpages
+     man.mkpath
+     system('mkdir', 'man')
+     system('./ks', 'documentation', '-t', 'man', '-d', 'man')
+
+     man1.install Dir['man/*']
   end
   
   def install
@@ -58,6 +83,9 @@ class KeystoneDevelop < Formula
              "#{apiFlag} #{authProxyFlag} #{versionFlag} #{ghClientIdFlag} #{ghClientSecretFlag} #{glClientIdFlag} #{glClientSecretFlag}",
              '-o',
              'ks')
+
+      install_completions()
+      install_manpages()
     end
 
     bin.install "cli/ks" => "ks"
