@@ -3,10 +3,10 @@ require 'open3'
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.26'
-  url 'https://github.com/wearedevx/keystone/archive/0.2.26.tar.gz'
-  sha256 'e1c2d585f7ce4ec865f0671b6660ca5dc7ed041ad9cbf6410b07fbe4ffc58e78'
-  version '0.2.26'
+  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.27'
+  url 'https://github.com/wearedevx/keystone/archive/0.2.27.tar.gz'
+  sha256 'c23986897a3360ef572f7d221c93dbb582e860e8b1f22fa63647648f8312acca'
+  version '0.2.27'
 
   depends_on 'git'
   depends_on 'gcc@11'
@@ -61,10 +61,10 @@ class Keystone < Formula
     constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-26---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-27---keystone-server-esk4nrfqlq-oa.a.run.app'"
     authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
-    versionFlag = "-X '#{constantsPkg}.Version=0.2.26'"
+    versionFlag = "-X '#{constantsPkg}.Version=0.2.27'"
 
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=60165e42468cf5e34aa8'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
