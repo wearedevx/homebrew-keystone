@@ -66,13 +66,10 @@ jobs:
   bottling-catalina:
     needs: homebrew-deploy
     runs-on: macos-10.15
-    env:
-      SED: gsed
     steps:
       - name: Install as bottle
         run: |-
           brew tap wearedevx/keystone
-          brew install gsed
 
           brew install --build-bottle wearedevx/keystone/keystone
           brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
@@ -89,13 +86,10 @@ jobs:
   bottling-big_sur:
     needs: [homebrew-deploy, bottling-catalina]
     runs-on: macos-11
-    env:
-      SED: gsed
     steps:
       - name: Install as bottle
         run: |-
           brew tab wearedevx/keystone
-          brew install gsed
           brew install --build-bottle wearedevx/keystone/keystone
           brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
           brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
@@ -113,11 +107,8 @@ jobs:
     runs-on: macos-12
     steps:
       - name: Install as bottle
-        env:
-          SED: gsed
         run: |-
           brew tap wearedevx/keystone
-          brew install gsed
           brew install --build-bottle wearedevx/keystone/keystone
           brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
           brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json

@@ -33,7 +33,7 @@ if [ "$GITLAB_CLIENT_ID" == '' ]; then
 fi
 
 if [ "$GITLAB_CLIENT_SECRET" == '' ]; then
-	echo 'Invalid GitLaab client secret'
+	echo 'Invalid GitLab client secret'
 	exit 1
 fi
 
@@ -57,7 +57,8 @@ function apply_template() {
 		class_name="KeystoneDevelop"
 	else
 		target="$PWD/Formula/keystone${suffix}.rb"
-		class_name="Keystone"
+    class_suffix=$(echo $suffix | $SED 's/\@/AT/;s/\.//;p')
+		class_name="Keystone${class_suffix}"
 	fi
 
 	cp -f $PWD/templates/keystone.template.rb $target
