@@ -19,10 +19,10 @@ on:
     types: [homebrew-deploy]
 
 env:
-  KSAPI_URL: ${{ github.inputs.api_url || github.event.client_payload.url }}
-  AUTH_PROXY: ${{ github.inputs.auth_proxy || github.event.client_payload.auth_proxy }}
-  REF: ${{ github.inputs.ref || github.event.client_payload.ref }}
-  TAG: ${{ github.inputs.tag || github.event.client_payload.tag }}
+  KSAPI_URL: ${{ inputs.api_url || github.event.client_payload.url }}
+  AUTH_PROXY: ${{ inputs.auth_proxy || github.event.client_payload.auth_proxy }}
+  REF: ${{ inputs.ref || github.event.client_payload.ref }}
+  TAG: ${{ inputs.tag || github.event.client_payload.tag }}
 
 jobs:
   homebrew-deploy:
