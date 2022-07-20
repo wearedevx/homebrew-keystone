@@ -2,14 +2,27 @@ name: Homebrew deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      api_url:
+        required: true
+        description: "API URL"
+      auth_proxy:
+        required: true
+        description: "AUTH Proxy"
+      ref:
+        required: true
+        description: "Ref"
+      tag:
+        required: true
+        description: "Tag"
   repository_dispatch:
     types: [homebrew-deploy]
 
 env:
-  KSAPI_URL: ${{ github.event.client_payload.url }}
-  AUTH_PROXY: ${{ github.event.client_payload.auth_proxy }}
-  REF: ${{ github.event.client_payload.ref }}
-  TAG: ${{ github.event.client_payload.tag }}
+  KSAPI_URL: ${{ github.inputs.api_url || github.event.client_payload.url }}
+  AUTH_PROXY: ${{ github.inputs.auth_proxy || github.event.client_payload.auth_proxy }}
+  REF: ${{ github.inputs.ref || github.event.client_payload.ref }}
+  TAG: ${{ github.inputs.tag || github.event.client_payload.tag }}
 
 jobs:
   homebrew-deploy:
