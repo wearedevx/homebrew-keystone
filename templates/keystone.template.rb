@@ -16,7 +16,7 @@ class CLASS < Formula
   depends_on 'libsodium'
 
   bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/<%BRANCH%>/"
+    root_url "https://www.github.com/wearedevx/keystone/releases/download/<%BRANCH%>"
     rebuild 1
     sha256 cellar: :any, big_sur: "ffe20ff29029525856d8cfa6dcb9b5929a73cb590f4cd408833eb037fa82d34f"
   end
