@@ -23,6 +23,7 @@ env:
   AUTH_PROXY: ${{ inputs.auth_proxy || github.event.client_payload.auth_proxy }}
   REF: ${{ inputs.ref || github.event.client_payload.ref }}
   TAG: ${{ inputs.tag || github.event.client_payload.tag }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   homebrew-deploy:
@@ -75,7 +76,6 @@ jobs:
           brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
           brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
 
-          brew install gh
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
           rename 's/--/-/g' *.tar.gz
           gh release upload **.tar.gz
