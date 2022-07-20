@@ -12,7 +12,6 @@ env:
 
 jobs:
   homebrew-deploy:
-    
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,3 +48,60 @@ jobs:
           branch: main
           default_author: github_actions
           message: release ${{ env.TAG }}
+
+  bottling-catalina:
+    needs: homebrew-deploy
+    runs-on: macos-10.15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install as bottle
+        run: |-
+          brew install --build-bottle wearedevx/keystone/keystone
+          brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
+          brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
+          git push origin main
+
+          brew install gh
+          gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
+          rename 's/--/-/g' *.tar.gz
+          gh release upload **.tar.gz
+
+  bottling-big_sur:
+    needs: [homebrew-deploy, bottling-catalina]
+    runs-on: macos-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install as bottle
+        run: |-
+          brew install --build-bottle wearedevx/keystone/keystone
+          brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
+          brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
+          git push origin main
+
+          brew install gh
+          gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
+          rename 's/--/-/g' *.tar.gz
+          gh release upload **.tar.gz
+
+  bottling-monterey:
+    needs: [homebrew-deploy, bottling-catalina, bottling-big_sur]
+    runs-on: macos-12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install as bottle
+        run: |-
+          brew install --build-bottle wearedevx/keystone/keystone
+          brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
+          brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
+          git push origin main
+
+          brew install gh
+          gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
+          rename 's/--/-/g' *.tar.gz
+          gh release upload **.tar.gz
