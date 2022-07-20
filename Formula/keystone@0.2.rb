@@ -1,6 +1,6 @@
 require 'open3'
 
-class Keystone < Formula
+class CLASS < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: '0.2.43'
