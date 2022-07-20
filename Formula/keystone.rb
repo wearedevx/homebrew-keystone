@@ -72,10 +72,10 @@ class Keystone < Formula
 
     versionFlag = "-X '#{constantsPkg}.Version=0.2.43'"
 
-    ghClientIdFlag = "-X '#{authPkg}.githubClientId=60165e42468cf5e34aa8'"
-    ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
-    glClientIdFlag = "-X '#{authPkg}.gitlabClientId=d372c2f3eebd9c498b41886667609fbdcf149254bcb618ddc199047cbbc46b78'"
-    glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=ffe9317fd42d32ea7db24c79f9ee25a3e30637b886f3bc99f951710c8cdc3650'"
+    ghClientIdFlag = "-X '#{authPkg}.githubClientId=ghcid'"
+    ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=ghcs'"
+    glClientIdFlag = "-X '#{authPkg}.gitlabClientId=glcid'"
+    glClientSecretFlag = "-X '#{authPkg}.gitlabClientSecret=glcs'"
 
     Dir.chdir 'cli' do
       system(Formula['go@1.16'].bin + 'go', 'clean')

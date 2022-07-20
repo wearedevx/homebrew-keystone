@@ -1,4 +1,4 @@
-class Keystone < Formula
+class KeystoneAT01 < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: '0.1.130'

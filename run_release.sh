@@ -57,7 +57,7 @@ function apply_template() {
 		class_name="KeystoneDevelop"
 	else
 		target="$PWD/Formula/keystone${suffix}.rb"
-    class_suffix=$(echo $suffix | $SED 's/\@/AT/;s/\.//;p')
+    class_suffix=$(echo $suffix | $SED -n -e 's/\@/AT/;s/\.//;p')
 		class_name="Keystone${class_suffix}"
 	fi
 
