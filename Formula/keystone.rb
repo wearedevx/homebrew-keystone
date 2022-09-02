@@ -5,7 +5,7 @@ class Keystone < Formula
   homepage 'https://keytone.sh'
   head 'https://github.com/wearedevx/keystone.git', branch: '0.2.44'
   url 'https://github.com/wearedevx/keystone/archive/0.2.44.tar.gz'
-  sha256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+  sha256 'f29abbdd81fefc29a49b0d286621f388fe799d9c08e37700b6042f0796b3d257'
   version '0.2.44'
 
   depends_on 'git'
@@ -17,8 +17,8 @@ class Keystone < Formula
 
   bottle do
     root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.44"
-    rebuild 1
-    sha256 cellar: :any, big_sur: "ffe20ff29029525856d8cfa6dcb9b5929a73cb590f4cd408833eb037fa82d34f"
+    rebuild 2
+    sha256 cellar: :any, big_sur: "f8d714a13b2562fcb72e2c45a90046f9434e3f2f93f4dfc8950008199037c874"
   end
 
   def install_themis
