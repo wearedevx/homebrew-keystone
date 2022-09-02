@@ -16,9 +16,9 @@ class Keystone < Formula
   depends_on 'libsodium'
 
   bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.44"
+    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.45"
     rebuild 2
-    sha256 cellar: :any, big_sur: "f8d714a13b2562fcb72e2c45a90046f9434e3f2f93f4dfc8950008199037c874"
+    sha256 cellar: :any, big_sur: "d444c81b62e4131c06cd9d60767797131d6e24915e86c31ed9acee946e66bc13"
   end
 
   def install_themis
