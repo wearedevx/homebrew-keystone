@@ -17,7 +17,7 @@ class Keystone < Formula
 
   bottle do
     root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.45"
-    rebuild 2
+    rebuild 3
     sha256 cellar: :any, big_sur: "d444c81b62e4131c06cd9d60767797131d6e24915e86c31ed9acee946e66bc13"
   end
 
