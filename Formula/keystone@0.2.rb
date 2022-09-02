@@ -3,10 +3,10 @@ require 'open3'
 class KeystoneAT02 < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.43'
-  url 'https://github.com/wearedevx/keystone/archive/0.2.43.tar.gz'
-  sha256 'a3d9c2d6a1d0ef1bbdb057d642cad35cc48e421fe43e96905acff0fd11f2dfbc'
-  version '0.2.43'
+  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.44'
+  url 'https://github.com/wearedevx/keystone/archive/0.2.44.tar.gz'
+  sha256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+  version '0.2.44'
 
   depends_on 'git'
   depends_on 'gcc@11'
@@ -16,7 +16,7 @@ class KeystoneAT02 < Formula
   depends_on 'libsodium'
 
   bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.43"
+    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.44"
     rebuild 1
     sha256 cellar: :any, big_sur: "ffe20ff29029525856d8cfa6dcb9b5929a73cb590f4cd408833eb037fa82d34f"
   end
@@ -67,10 +67,10 @@ class KeystoneAT02 < Formula
     constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-43---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-44---keystone-server-esk4nrfqlq-oa.a.run.app'"
     authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
-    versionFlag = "-X '#{constantsPkg}.Version=0.2.43'"
+    versionFlag = "-X '#{constantsPkg}.Version=0.2.44'"
 
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=60165e42468cf5e34aa8'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
