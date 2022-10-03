@@ -3,10 +3,10 @@ require 'open3'
 class Keystone < Formula
   desc 'Securely share application secret with your team'
   homepage 'https://keytone.sh'
-  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.45'
-  url 'https://github.com/wearedevx/keystone/archive/0.2.45.tar.gz'
-  sha256 '74d2665054f896b80319d746cd357c0f72ace512d1320ba98bb44f25b1d9823c'
-  version '0.2.45'
+  head 'https://github.com/wearedevx/keystone.git', branch: '0.2.46'
+  url 'https://github.com/wearedevx/keystone/archive/0.2.46.tar.gz'
+  sha256 '3ddfa731bd4c0e2ec7cdc8e19886b29661aae272500cb90778012ab0ad408fe6'
+  version '0.2.46'
 
   depends_on 'git'
   depends_on 'gcc@11'
@@ -16,9 +16,9 @@ class Keystone < Formula
   depends_on 'libsodium'
 
   bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.45"
-    rebuild 3
-    sha256 cellar: :any, big_sur: "d444c81b62e4131c06cd9d60767797131d6e24915e86c31ed9acee946e66bc13"
+    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.44"
+    rebuild 2
+    sha256 cellar: :any, big_sur: "f8d714a13b2562fcb72e2c45a90046f9434e3f2f93f4dfc8950008199037c874"
   end
 
   def install_themis
@@ -67,10 +67,10 @@ class Keystone < Formula
     constantsPkg = "#{packagePrefix}/pkg/constants"
     authPkg = "#{packagePrefix}/pkg/client/auth"
 
-    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-45---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    apiFlag = "-X '#{clientPkg}.ApiURL=https://v0-2-46---keystone-server-esk4nrfqlq-oa.a.run.app'"
     authProxyFlag = "-X '#{authPkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
-    versionFlag = "-X '#{constantsPkg}.Version=0.2.45'"
+    versionFlag = "-X '#{constantsPkg}.Version=0.2.46'"
 
     ghClientIdFlag = "-X '#{authPkg}.githubClientId=60165e42468cf5e34aa8'"
     ghClientSecretFlag = "-X '#{authPkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
