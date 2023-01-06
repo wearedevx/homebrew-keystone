@@ -64,17 +64,33 @@ jobs:
           default_author: github_actions
           message: release ${{ env.TAG }}
 
-  bottling-catalina:
+  bottling:
     needs: homebrew-deploy
-    runs-on: macos-10.15
+    strategy:
+      matrix: 
+        os:
+          - macos-10.15
+          - macos-11
+          - macos-12
+    runs-on: ${{matrix.os}}
     steps:
+      - name: Setup Cache
+        id: cache-outputs
+        uses: actions/cache@v3
+        with:
+          path: /usr/local/bottles
+          key: macos-bottles-output-${{env.TAG}}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Install as bottle
         run: |-
           brew tap wearedevx/keystone
+          cd /usr/local/Homebrew/Taps/weredevx/homebrew-keystone
 
-          brew install --build-bottle wearedevx/keystone/keystone
-          brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
-          brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
+          brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
+          mv keystone--${{env.TAG}}.* /usr/local/bottles
 
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
           rename 's/--/-/g' *.tar.gz
@@ -83,40 +99,29 @@ jobs:
           cd /usr/local/Homebrew/Taps/wearedevx/homebrew-keystone
           gi push origin main
 
-  bottling-big_sur:
-    needs: [homebrew-deploy, bottling-catalina]
-    runs-on: macos-11
+  deploy:
+    runs-on: macos-latest
+    needs: [bottling]
     steps:
-      - name: Install as bottle
+      - name: Setup Cache
+        id: cache-outputs
+        uses: actions/cache@v3
+        with:
+          path: /usr/local/bottles
+          key: macos-bottles-output-${{env.TAG}}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Publish the bottles
         run: |-
-          brew tab wearedevx/keystone
-          brew install --build-bottle wearedevx/keystone/keystone
-          brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
-          brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
+          cp /usr/local/bottles/* ./
+        
+          echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
+          if ls *.{json,tar.gz}; then
+            brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone --git-name "CI" --git-email "ci@wearedevx.com" --publish;
+          else
+            echo "===> No bottles found to publish";
+          if;
 
-          brew install gh
-          gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
-          rename 's/--/-/g' *.tar.gz
-          gh release upload **.tar.gz
 
-          cd /usr/local/Homebrew/Taps/wearedevx/homebrew-keystone
-          gi push origin main
-
-  bottling-monterey:
-    needs: [homebrew-deploy, bottling-catalina, bottling-big_sur]
-    runs-on: macos-12
-    steps:
-      - name: Install as bottle
-        run: |-
-          brew tap wearedevx/keystone
-          brew install --build-bottle wearedevx/keystone/keystone
-          brew bottle --json --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} wearedevx/keystone/keystone
-          brew bottle --root-url https://github.com/wearedevx/keystone/releases/download/${{env.TAG}} --merge --write ./*json
-
-          brew install gh
-          gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
-          rename 's/--/-/g' *.tar.gz
-          gh release upload **.tar.gz
-
-          cd /usr/local/Homebrew/Taps/wearedevx/homebrew-keystone
-          gi push origin main

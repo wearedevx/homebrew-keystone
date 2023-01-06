@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 TMP_DIR="$(mktemp -d)"
 
@@ -71,6 +71,7 @@ function apply_template() {
 	$SED -i "s#<%AUTH_PROXY%>#${AUTH_PROXY}#g" $target
 
 	$SED -i "s/<%CHECKSUM%>/${sha256}/g" $target
+	$SED -i "s/# sha256/sha256/g" $target
 	$SED -i "s/<%GITHUB_CLIENT_ID%>/${GITHUB_CLIENT_ID}/g" $target
 	$SED -i "s/<%GITHUB_CLIENT_SECRET%>/${GITHUB_CLIENT_SECRET}/g" $target
 	$SED -i "s/<%GITLAB_CLIENT_ID%>/${GITLAB_CLIENT_ID}/g" $target
