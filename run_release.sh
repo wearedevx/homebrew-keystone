@@ -7,38 +7,38 @@ wget "https://github.com/wearedevx/keystone/archive/${BRANCH}.tar.gz" \
 
 sha256=$(sha256sum "${TMP_DIR}/keystone.tar.gz" | awk '{print $1}')
 
-if [ "$KSAPI_URL" == "" ]; then
+if [ "$KSAPI_URL" = "" ]; then
 	echo 'No valid API Url'
 	exit 1
 fi
 
-if [ "$BRANCH" == "" ]; then
+if [ "$BRANCH" = "" ]; then
 	echo 'Invalid branch'
 	exit 1
 fi
 
-if [ "$GITHUB_CLIENT_ID" == '' ]; then
+if [ "$GITHUB_CLIENT_ID" = '' ]; then
 	echo 'Invalid Github client id'
 	exit 1
 fi
 
-if [ "$GITHUB_CLIENT_SECRET" == '' ]; then
+if [ "$GITHUB_CLIENT_SECRET" = '' ]; then
 	echo 'Invalid Github client secret'
 	exit 1
 fi
 
-if [ "$GITLAB_CLIENT_ID" == '' ]; then
+if [ "$GITLAB_CLIENT_ID" = '' ]; then
 	echo 'Invalid GitLab client id'
 	exit 1
 fi
 
-if [ "$GITLAB_CLIENT_SECRET" == '' ]; then
+if [ "$GITLAB_CLIENT_SECRET" = '' ]; then
 	echo 'Invalid GitLab client secret'
 	exit 1
 fi
 
-function apply_template() {
-	if [[ -z "$SED" ]]; then
+apply_template() {
+	if [ -z "$SED" ]; then
 		SED=sed		 
 	fi
 
@@ -52,7 +52,7 @@ function apply_template() {
 
 	# Using "develop" as a version name is invalid for Homebrew,
 	# so let’s make a separate formula for the develop version
-	if [ "$1" == "develop" ]; then
+	if [ "$1" = "develop" ]; then
 		target="$PWD/Formula/keystone-develop.rb"
 		class_name="KeystoneDevelop"
 	else
