@@ -82,7 +82,7 @@ jobs:
       - name: Install as bottle
         run: |-
           brew tap wearedevx/keystone
-          cd /usr/local/Homebrew/Taps/wearedevx/homebrew-keystone
+          cd /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
 
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
           mv keystone--${{env.TAG}}.* /usr/local/bottles
