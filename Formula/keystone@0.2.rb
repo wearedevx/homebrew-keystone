@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require "open3"
 
 class KeystoneAT02 < Formula
   desc "Securely share application secret with your team"
   homepage "https://keytone.sh"
-  url "https://github.com/wearedevx/keystone/archive/0.2.46.tar.gz"
-  sha256 "3ddfa731bd4c0e2ec7cdc8e19886b29661aae272500cb90778012ab0ad408fe6"
-  head "https://github.com/wearedevx/keystone.git", branch: "0.2.46"
+  url "https://github.com/wearedevx/keystone/archive/0.2.47.tar.gz"
+  sha256 "2a1a6eaa3813f8fd86212ee7fc4089128058d308f21402ea110ce729530afc62"
+  head "https://github.com/wearedevx/keystone.git", branch: "0.2.47"
 
   bottle do
     root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.46"
@@ -66,12 +68,13 @@ class KeystoneAT02 < Formula
     constants_pkg = "#{package_prefix}/pkg/constants"
     auth_pkg = "#{package_prefix}/pkg/client/auth"
 
-    api_flag = "-X '#{client_pkg}.ApiURL=https://v0-2-46---keystone-server-esk4nrfqlq-oa.a.run.app'"
+    api_flag = "-X '#{client_pkg}.ApiURL=https://v0-2-47---keystone-server-esk4nrfqlq-oa.a.run.app'"
     auth_proxy_flag = "-X '#{auth_pkg}.authRedirectURL=https://europe-west6-keystone-245200.cloudfunctions.net/auth-proxy'"
 
-    version_flag = "-X '#{constants_pkg}.Version=0.2.46'"
+    version_flag = "-X '#{constants_pkg}.Version=0.2.47'"
 
-    gh_client_id_flag = "-X '#{auth_pkg}.githubClientId=60165e42468cf5e34aa8'"
+    gh_client_id_flag =
+      "-X '#{auth_pkg}.githubClientId=60165e42468cf5e34aa8'"
     gh_client_secret_flag =
       "-X '#{auth_pkg}.githubClientSecret=016a30fed8fe9029b22272650af6aa18b3dcf590'"
     gl_client_id_flag =
