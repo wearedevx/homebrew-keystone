@@ -82,11 +82,6 @@ jobs:
           ref: master
       - name: Install as bottle
         run: |-
-          brew tap wearedevx/keystone
-          brew install wearedevx/keystone/keystone
-
-          cd /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
-
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
           mv keystone--${{env.TAG}}.* /usr/local/bottles
 
@@ -94,7 +89,6 @@ jobs:
           rename 's/--/-/g' *.tar.gz
           gh release upload **.tar.gz
 
-          cd /usr/local/Homebrew/Taps/wearedevx/homebrew-keystone
           git push origin master
   deploy:
     runs-on: macos-latest
