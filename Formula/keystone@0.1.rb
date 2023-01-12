@@ -11,6 +11,7 @@ class KeystoneAT01 < Formula
   depends_on "libsodium"
   depends_on "make"
   depends_on "openssl@1.1"
+  depends_on "pkg-config"
 
   def install_themis
     system("git", "clone", "--depth", "1", "--branch", "0.13.13", "https://github.com/cossacklabs/themis.git")

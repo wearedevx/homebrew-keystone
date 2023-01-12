@@ -10,7 +10,7 @@ class KeystoneAT02 < Formula
   head "https://github.com/wearedevx/keystone.git", branch: "0.2.47"
 
   bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.47"
+    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.46"
     rebuild 3
     sha256 cellar: :any, big_sur: "5e8e42475732886836e107825d1f477cbde70e4afe2f1e65f556963e21c9b8f9"
   end
@@ -21,6 +21,7 @@ class KeystoneAT02 < Formula
   depends_on "libsodium"
   depends_on "make"
   depends_on "openssl@1.1"
+  depends_on "pkg-config"
 
   def install_themis
     system("git", "clone", "--depth", "1", "--branch", "0.13.13", "https://github.com/cossacklabs/themis.git")
@@ -102,3 +103,5 @@ class KeystoneAT02 < Formula
     bin.install("cli/ks" => "ks")
   end
 end
+
+
