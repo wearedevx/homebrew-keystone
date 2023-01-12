@@ -81,12 +81,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
-      - name: Debug SSH
-        uses: lhotari/action-upterm@v1
       - name: Install as bottle
         run: |-
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
-          mv keystone--${{env.TAG}}.* /usr/local/bottles
+
+          for file in $(ls | grep keystone--${{env.TAG}}); then
+            cp "$file" "/usr/local/bottles/$file";
+          done
 
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
           rename 's/--/-/g' *.tar.gz
