@@ -22,7 +22,7 @@ env:
   REF: ${{ inputs.ref || github.event.client_payload.ref }}
   TAG: ${{ inputs.tag || github.event.client_payload.tag }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
-  HOMEBREW_OPT: /usr/local/opt
+  HOMEBREW_OPT: /usr/local/bin
 jobs:
   homebrew-deploy:
     runs-on: ubuntu-latest
@@ -83,6 +83,7 @@ jobs:
       - name: Install as bottle
         run: |-
           brew tap wearedevx/keystone
+          brew install pkg-config
           cd /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
 
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
