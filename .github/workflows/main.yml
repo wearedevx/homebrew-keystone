@@ -80,12 +80,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
-      - name: Debug SSH
-        uses: lhotari/action-upterm@v1
       - name: Install as bottle
         run: |-
           brew tap wearedevx/keystone
-          brew install pkg-config
+          brew install wearedevx/keystone/keystone
+
           cd /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
 
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
