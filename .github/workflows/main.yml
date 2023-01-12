@@ -22,7 +22,7 @@ env:
   REF: ${{ inputs.ref || github.event.client_payload.ref }}
   TAG: ${{ inputs.tag || github.event.client_payload.tag }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
-  HOMEBREW_OPT: /usr/local/bin
+  HOMEBREW_OPT: /usr/local/opt
 jobs:
   homebrew-deploy:
     runs-on: ubuntu-latest
