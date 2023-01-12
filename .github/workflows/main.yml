@@ -85,7 +85,7 @@ jobs:
         run: |-
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
 
-          for file in $(ls | grep keystone--${{env.TAG}}); then
+          for file in $(ls | grep keystone--${{env.TAG}}); do
             cp "$file" "/usr/local/bottles/$file";
           done
 
