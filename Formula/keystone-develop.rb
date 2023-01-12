@@ -2,7 +2,7 @@ require "open3"
 
 class KeystoneDevelop < Formula
   desc "Securely share application secret with your team"
-  homepage "https://keytone.sh"
+  homepage "https://keystone.sh"
   url "https://github.com/wearedevx/keystone/archive/develop.tar.gz"
   version "develop"
   sha256 "eb74a17c5c5921023639808930126b6ea6abe960a35a2e8647c1fb2c832bfb71"

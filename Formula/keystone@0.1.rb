@@ -1,6 +1,6 @@
 class KeystoneAT01 < Formula
   desc "Securely share application secret with your team"
-  homepage "https://keytone.sh"
+  homepage "https://keystone.sh"
   url "https://github.com/wearedevx/keystone/archive/0.1.130.tar.gz"
   sha256 "38adcccded1a3450e5df2a2d4321a52155f652e12e35c7af113daaee67b2c942"
   head "https://github.com/wearedevx/keystone.git", branch: "0.1.130"

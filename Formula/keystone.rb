@@ -4,7 +4,7 @@ require "open3"
 
 class Keystone < Formula
   desc "Securely share application secret with your team"
-  homepage "https://keytone.sh"
+  homepage "https://keystone.sh"
   url "https://github.com/wearedevx/keystone/archive/0.2.47.tar.gz"
   sha256 "2a1a6eaa3813f8fd86212ee7fc4089128058d308f21402ea110ce729530afc62"
   head "https://github.com/wearedevx/keystone.git", branch: "0.2.47"
