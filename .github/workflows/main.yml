@@ -89,8 +89,8 @@ jobs:
             mv "$f" "$(echo $f | sed s/--/-/g)"
           done;
 
-          gh release upload **.tar.gz
-          gh release upload **.json"
+          gh release upload --clobber ${{env.TAG}} **.tar.gz
+          gh release upload --clobber ${{env.TAG}} **.json"
   deploy:
     runs-on: macos-latest
     needs: [bottling]
