@@ -82,6 +82,8 @@ jobs:
         run: |-
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
 
+          brew reinstall gh --force
+
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
           rename 's/--/-/g' *.tar.gz
 
