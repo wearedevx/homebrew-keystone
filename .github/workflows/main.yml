@@ -110,4 +110,4 @@ jobs:
             brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone --git-name "CI" --git-email "ci@wearedevx.com" --publish;
           else
             echo "===> No bottles found to publish";
-          if;
+          if
