@@ -22,6 +22,7 @@ env:
   REF: ${{ inputs.ref || github.event.client_payload.ref }}
   TAG: ${{ inputs.tag || github.event.client_payload.tag }}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
   HOMEBREW_OPT: /usr/local/opt
 jobs:
   homebrew-deploy:
@@ -64,10 +65,10 @@ jobs:
     needs: homebrew-deploy
     # strategy:
     #   matrix:
-        # os:
-        #   - macos-10.15
-        #   - macos-11
-        #   - macos-12
+    # os:
+    #   - macos-10.15
+    #   - macos-11
+    #   - macos-12
     runs-on: macos-11
     # runs-on: ${{matrix.os}}
     steps:
@@ -81,10 +82,9 @@ jobs:
 
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
           rename 's/--/-/g' *.tar.gz
+
           gh release upload **.tar.gz
-          gh release upload **.json
-    
-          git push origin master
+          gh release upload **.json"
   deploy:
     runs-on: macos-latest
     needs: [bottling]
