@@ -85,7 +85,9 @@ jobs:
           brew reinstall gh --force
 
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
-          rename 's/--/-/g' *.tar.gz
+          for f in *.tar.gz; do
+            mv "$f" "$(echo $f | sed s/--/-/g)"
+          done;
 
           gh release upload **.tar.gz
           gh release upload **.json"
