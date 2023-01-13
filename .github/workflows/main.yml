@@ -93,6 +93,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
+      - name: Install gh
+        run: brew install gh
       - name: Publish the bottles
         run: |-
           gh release download --clobber ${{env.TAG}}
