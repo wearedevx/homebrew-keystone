@@ -90,7 +90,7 @@ jobs:
           done;
 
           gh release upload --clobber ${{env.TAG}} **.tar.gz
-          gh release upload --clobber ${{env.TAG}} **.json"
+          gh release upload --clobber ${{env.TAG}} **.json
   deploy:
     runs-on: macos-latest
     needs: [bottling]
