@@ -71,12 +71,6 @@ jobs:
     runs-on: macos-11
     # runs-on: ${{matrix.os}}
     steps:
-      - name: Setup Cache
-        id: cache-outputs
-        uses: actions/cache@v3
-        with:
-          path: /usr/local/bottles
-          key: macos-bottles-output-${{env.TAG}}
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -85,32 +79,23 @@ jobs:
         run: |-
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
 
-          for file in $(ls | grep keystone--${{env.TAG}}); do
-            cp "$file" "/usr/local/bottles/$file";
-          done
-
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
           rename 's/--/-/g' *.tar.gz
           gh release upload **.tar.gz
-
+          gh release upload **.json
+    
           git push origin master
   deploy:
     runs-on: macos-latest
     needs: [bottling]
     steps:
-      - name: Setup Cache
-        id: cache-outputs
-        uses: actions/cache@v3
-        with:
-          path: /usr/local/bottles
-          key: macos-bottles-output-${{env.TAG}}
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: master
       - name: Publish the bottles
         run: |-
-          cp /usr/local/bottles/* ./
+          gh release download --clobber ${{env.TAG}}
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
           if ls *.{json,tar.gz}; then
