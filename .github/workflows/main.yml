@@ -61,6 +61,7 @@ jobs:
           branch: master
           default_author: github_actions
           message: release ${{ env.TAG }}
+
   bottling:
     needs: homebrew-deploy
     strategy:
@@ -88,12 +89,22 @@ jobs:
             mv "$f" "$(echo $f | sed s/--/-/g)"
           done;
 
-          brew reinstall gh --force
+          # brew reinstall gh --force
 
-          gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
+          # gh release upload --clobber ${{env.TAG}} **.tar.gz
+          # gh release upload --clobber ${{env.TAG}} **.json
+      - name: Release upload
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: "*.tar.gz,*.json"
+          name: ${{ env.TAG }}
+          omitBody: true
+          omitBodyDuringUpdate: true
+          replaceArtifacts: true
+          tag: ${{ env.TAG }}
+          token: ${{secrets.GH_TOKEN}}
 
-          gh release upload --clobber ${{env.TAG}} **.tar.gz
-          gh release upload --clobber ${{env.TAG}} **.json
   deploy:
     runs-on: macos-latest
     needs: [bottling]
