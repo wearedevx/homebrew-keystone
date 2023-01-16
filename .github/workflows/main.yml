@@ -79,18 +79,12 @@ jobs:
       - name: Install gh
         run: brew install gh
       - name: Install as bottle
-        run: |-
-          brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
-
-          brew reinstall gh --force
-
-          gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
-          for f in *.tar.gz; do
-            mv "$f" "$(echo $f | sed s/--/-/g)"
-          done;
-
-          gh release upload --clobber ${{env.TAG}} **.tar.gz
-          gh release upload --clobber ${{env.TAG}} **.json
+        run:
+          "brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone\n\nbrew
+          reinstall gh --force\n\ngh release create -F - -t ${{env.TAG}} ${{env.TAG}}
+          \nfor f in *.tar.gz; do\n  mv \"$f\" \"$(echo $f | sed s/--/-/g)\"\ndone;\n\ngh
+          release upload --clobber ${{env.TAG}} **.tar.gz\ngh release upload --clobber
+          ${{env.TAG}} **.json"
   deploy:
     runs-on: macos-latest
     needs: [bottling]
@@ -110,4 +104,4 @@ jobs:
             brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone --git-name "CI" --git-email "ci@wearedevx.com" --publish;
           else
             echo "===> No bottles found to publish";
-          if
+          fi
