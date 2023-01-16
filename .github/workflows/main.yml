@@ -83,14 +83,14 @@ jobs:
           brew update
 
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
+          ls
+          for f in *.tar.gz; do
+            mv "$f" "$(echo $f | sed s/--/-/g)"
+          done;
 
           brew reinstall gh --force
 
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
-          ls
-          for f in *.tar.gz; do
-            mv \"$f\" \"$(echo $f | sed s/--/-/g)\"
-          done;
 
           gh release upload --clobber ${{env.TAG}} **.tar.gz
           gh release upload --clobber ${{env.TAG}} **.json
