@@ -63,14 +63,14 @@ jobs:
           message: release ${{ env.TAG }}
   bottling:
     needs: homebrew-deploy
-    # strategy:
-    #   matrix:
-    # os:
-    #   - macos-10.15
-    #   - macos-11
-    #   - macos-12
-    runs-on: macos-11
-    # runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - macos-10.15
+          - macos-11
+          - macos-12
+    # runs-on: macos-11
+    runs-on: ${{matrix.os}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -105,3 +105,8 @@ jobs:
           else
             echo "===> No bottles found to publish";
           fi
+      - name: Push the release
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{secrets.GH_TOKEN}}
+          branch: master
