@@ -87,6 +87,7 @@ jobs:
           brew reinstall gh --force
 
           gh release create -F - -t ${{env.TAG}} ${{env.TAG}} 
+          ls
           for f in *.tar.gz; do
             mv \"$f\" \"$(echo $f | sed s/--/-/g)\"
           done;
