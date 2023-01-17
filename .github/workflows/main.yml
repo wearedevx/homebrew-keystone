@@ -121,7 +121,7 @@ jobs:
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
           if ls *{.json,.tar.gz}; then
-            brew test-bot --git-name ci --git-email ci@wearedevx.com --publish
+            brew test-bot --git-name ci --git-email ci@wearedevx.com --publish ./Formula/keystone.rb
           else
             echo "===> No bottles found to publish";
           fi
