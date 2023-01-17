@@ -83,10 +83,10 @@ jobs:
           brew update
 
           brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone
-          ls
-          for f in *.tar.gz; do
-            mv "$f" "$(echo $f | sed s/--/-/g)"
-          done;
+          # ls
+          # for f in *.tar.gz; do
+            # mv "$f" "$(echo $f | sed s/--/-/g)"
+          # done;
 
           # brew reinstall gh --force
 
@@ -120,12 +120,8 @@ jobs:
           brew install -s wearedevx/keystone/keystone
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
-          if ls *.json; then
-            brew bottle --merge --write --no-commit keystone*.json
-            rm *{.json,.tar.gz}
-            git add Formula/keystone.rb
-            git commit --author "CI <ci@wearedevx.com>" -m "Release ${{env.TAG}}"
-            git push
+          if ls *{.json,.tar.gz}; then
+            brew test-bot --git-name ci --git-email ci@wearedevx.com --publish
           else
             echo "===> No bottles found to publish";
           fi
