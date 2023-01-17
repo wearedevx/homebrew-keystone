@@ -118,10 +118,10 @@ jobs:
           gh release download --clobber ${{env.TAG}}
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
-          if ls *.{json}; then
+          if ls *.json; then
             brew --merge --write --no-commit keystone*.json
-            rm {*.json,*tar.gz}
-            git add .
+            rm *{.json,.tar.gz}
+            git add Formula/keystone.rb
             git commit --author "CI <ci@wearedevx.com>" -m "Release ${{env.TAG}}"
             git push
           else
