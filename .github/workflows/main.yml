@@ -116,6 +116,8 @@ jobs:
       - name: Publish the bottles
         run: |-
           gh release download --clobber ${{env.TAG}}
+          brew tap wearedevx/keystone
+          brew install -s wearedevx/keystone/keystone
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
           if ls *.json; then
