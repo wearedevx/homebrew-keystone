@@ -61,7 +61,6 @@ jobs:
           branch: master
           default_author: github_actions
           message: release ${{ env.TAG }}
-
   bottling:
     needs: homebrew-deploy
     strategy:
@@ -104,7 +103,6 @@ jobs:
           replaceArtifacts: true
           tag: ${{ env.TAG }}
           token: ${{secrets.GH_TOKEN}}
-
   deploy:
     runs-on: macos-latest
     needs: [bottling]
@@ -120,13 +118,12 @@ jobs:
           gh release download --clobber ${{env.TAG}}
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
-          if ls *.{json,tar.gz}; then
-            brew test-bot --tap wearedevx/homebrew-keystone wearedevx/keystone/keystone --git-name "CI" --git-email "ci@wearedevx.com" --publish;
+          if ls *.{json}; then
+            brew --merge --write --no-commit keystone*.json
+            rm {*.json,*tar.gz}
+            git add .
+            git commit --author "CI <ci@wearedevx.com>" -m "Release ${{env.TAG}}"
+            git push
           else
             echo "===> No bottles found to publish";
           fi
-      - name: Push the release
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{secrets.GH_TOKEN}}
-          branch: master
