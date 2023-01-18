@@ -9,12 +9,6 @@ class KeystoneAT02 < Formula
   sha256 "2a1a6eaa3813f8fd86212ee7fc4089128058d308f21402ea110ce729530afc62"
   head "https://github.com/wearedevx/keystone.git", branch: "0.2.47"
 
-  bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.47"
-    rebuild 3
-    sha256 cellar: :any, big_sur: "5e8e42475732886836e107825d1f477cbde70e4afe2f1e65f556963e21c9b8f9"
-  end
-
   depends_on "gcc@11"
   depends_on "git"
   depends_on "go@1.16"
