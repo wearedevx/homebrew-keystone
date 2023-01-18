@@ -70,7 +70,7 @@ jobs:
         with:
           ref: master
       - name: Debug with ssh
-        uses: lhotari/action-upterm@v1
+        uses: mxschmitt/action-tmate@v3
       - name: Install gh
         run: brew install gh
       - name: Install as bottle
