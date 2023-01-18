@@ -90,7 +90,9 @@ jobs:
             --skip-livecheck \
             --tap wearedevx/homebrew-keystone \
             --testing-formulae wearedevx/keystone/keystone \
+            --root-url https://github.com/wearedevx/homebrew-keystone/releases/download/${{env.TAG}} \ 
             wearedevx/keystone/keystone
+
       - name: Release upload
         uses: ncipollo/release-action@v1
         with:
@@ -122,7 +124,12 @@ jobs:
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
           if ls *{.json,.tar.gz}; then
-            brew bottle --merge --write --no-commit *.json
+            brew bottle \
+              --merge \
+              --write \
+              --no-commit \
+              --root-url https://github.com/wearedevx/homebrew-keystone/releases/download/${{ env.TAG }}/ \ 
+              *.json
             rm *{.json,.tar.gz}
             git add Formula/*
             git commit --allow-empty -m "release ${{ env.Tag }}"

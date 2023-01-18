@@ -9,12 +9,6 @@ class CLASS < Formula
   # sha256 "<%CHECKSUM%>"
   head "https://github.com/wearedevx/keystone.git", branch: "<%BRANCH%>"
 
-  bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/<%BRANCH%>"
-    rebuild 3
-    sha256 cellar: :any, big_sur: "5e8e42475732886836e107825d1f477cbde70e4afe2f1e65f556963e21c9b8f9"
-  end
-
   depends_on "gcc@11"
   depends_on "git"
   depends_on "go@1.16"
