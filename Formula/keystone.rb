@@ -11,8 +11,8 @@ class Keystone < Formula
 
   bottle do
     root_url "https://github.com/wearedevx/homebrew-keystone/releases/download/keystone-0.2.47"
-    rebuild 4
-    sha256 cellar: :any, big_sur: "255c6c9b7fe6c96ac78fb91767f54a476e55e8ecdcdf2fe225f37600c2b3eb86"
+    rebuild 5
+    sha256 cellar: :any, monterey: "a8e4c69021923a748218270aedaa6b9679286dc55654ee7222ed19471d2d2e99"
   end
 
   depends_on "gcc@11"
