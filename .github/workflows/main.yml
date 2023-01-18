@@ -115,7 +115,7 @@ jobs:
       - name: Setup workdir
         run: |-
           mkdir /usr/local/Homebrew/Library/Taps/wearedevx
-          ln -s $PWD /usr/local/Homebrew/Library/Tabs/wearedevx/homebrew-keystone
+          ln -s $PWD /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
       - name: Publish the bottles
         run: |-
           gh release download --clobber ${{env.TAG}}
