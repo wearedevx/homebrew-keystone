@@ -127,7 +127,7 @@ jobs:
               --merge \
               --write \
               --no-commit \
-              --root-url https://github.com/wearedevx/homebrew-keystone/releases/download/${{ env.TAG }}/ \ 
+              --root-url "$https://github.com/wearedevx/homebrew-keystone/releases/download/${{ env.TAG }}/" \
               *.json
             rm *{.json,.tar.gz}
             git add Formula/*
