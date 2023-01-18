@@ -90,8 +90,7 @@ jobs:
             --skip-livecheck \
             --tap wearedevx/homebrew-keystone \
             --testing-formulae wearedevx/keystone/keystone \
-            --root-url https://github.com/wearedevx/homebrew-keystone/releases/download/${{env.TAG}} \ 
-            wearedevx/keystone/keystone
+            --root-url https://github.com/wearedevx/homebrew-keystone/releases/download/${{env.TAG}} 
 
       - name: Release upload
         uses: ncipollo/release-action@v1
