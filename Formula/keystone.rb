@@ -10,9 +10,10 @@ class Keystone < Formula
   head "https://github.com/wearedevx/keystone.git", branch: "0.2.47"
 
   bottle do
-    root_url "https://www.github.com/wearedevx/keystone/releases/download/0.2.47"
-    rebuild 3
-    sha256 cellar: :any, big_sur: "5e8e42475732886836e107825d1f477cbde70e4afe2f1e65f556963e21c9b8f9"
+    root_url "https://github.com/wearedevx/homebrew-keystone/releases/download/keystone-0.2.47"
+    rebuild 4
+    sha256 cellar: :any, monterey: "1120be981acb87566e47745b73e21b70ec80644a446790cb94b69c4f1bb25553"
+    sha256 cellar: :any, big_sur:  "bf381b7f7722d8c7c312b114ac540e8f24c25cdfb69bb25d03e2c7b35d0d40af"
   end
 
   depends_on "gcc@11"
