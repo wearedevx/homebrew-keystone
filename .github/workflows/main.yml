@@ -129,3 +129,4 @@ jobs:
             git push
           else
             echo "===> No bottles found to publish";
+          fi;
