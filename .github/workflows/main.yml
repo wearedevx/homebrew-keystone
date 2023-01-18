@@ -61,9 +61,12 @@ jobs:
           branch: master
           default_author: github_actions
           message: release ${{ env.TAG }}
-  bottling-os-11:
+  bottling:
     needs: homebrew-deploy
-    runs-on: macos-11
+    strategy:
+      matrix:
+        os: [macos-11, macos-12]
+    runs-on: ${{matrix.os}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -88,11 +91,6 @@ jobs:
             --tap wearedevx/homebrew-keystone \
             --testing-formulae wearedevx/keystone/keystone \
             wearedevx/keystone/keystone
-      - name: Git push
-        run: |-
-          git add Formula/keystone.rb
-          git commit --allow-empty --author "CI <ci@wearedevx.com>" -m "Release 0.2.47 ${{ runner.os }}"
-          git push
       - name: Release upload
         uses: ncipollo/release-action@v1
         with:
@@ -104,44 +102,30 @@ jobs:
           replaceArtifacts: true
           tag: ${{ env.TAG }}
           token: ${{secrets.GH_TOKEN}}
-  bottling-os-12:
-    needs: bottling-os-11
-    runs-on: macos-12
+  deploy:
+    runs-on: macos-latest
+    needs: [bottling]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: master
-      - name: Setup Working Dir
+      - name: Install gh
+        run: brew install gh
+      - name: Setup workdir
         run: |-
-          mkdir /usr/local/Homebrew/Library/Taps/wearedevx/
-          ln -s $PWD /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
-      - name: Install as bottle
+          mkdir /usr/local/Homebrew/Library/Taps/wearedevx
+          ln -s $PWD /usr/local/Homebrew/Library/Tabs/wearedevx/homebrew-keystone
+      - name: Publish the bottles
         run: |-
-          brew update
+          gh release download --clobber ${{env.TAG}}
 
-          brew test-bot \
-            --publish \
-            --skip-dependents \
-            --skip-setup \
-            --skip-online-checks \
-            --skip-livecheck \
-            --tap wearedevx/homebrew-keystone \
-            --testing-formulae wearedevx/keystone/keystone \
-            wearedevx/keystone/keystone
-      - name: Git push
-        run: |-
-          git add Formula/keystone.rb
-          git commit --allow-empty --author "CI <ci@wearedevx.com>" -m "Release 0.2.47 ${{ runner.os }}"
-          git push
-      - name: Release upload
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          artifacts: "*.tar.gz,*.json"
-          name: ${{ env.TAG }}
-          omitBody: true
-          omitBodyDuringUpdate: true
-          replaceArtifacts: true
-          tag: ${{ env.TAG }}
-          token: ${{secrets.GH_TOKEN}}
+          echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
+          if ls *{.json,.tar.gz}; then
+            brew bottle --merge --write --no-commit *.json
+            rm *{.json,.tar.gz}
+            git add Formula/*
+            git commit --allow-empty -m "release ${{ env.Tag }}"
+            git push
+          else
+            echo "===> No bottles found to publish";
