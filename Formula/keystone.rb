@@ -9,6 +9,13 @@ class Keystone < Formula
   sha256 "2a1a6eaa3813f8fd86212ee7fc4089128058d308f21402ea110ce729530afc62"
   head "https://github.com/wearedevx/keystone.git", branch: "0.2.47"
 
+  bottle do
+    root_url "https://github.com/wearedevx/homebrew-keystone/releases/download/0.2.47"
+    rebuild 1
+    sha256 cellar: :any, monterey: "d0bb68a4d9564b03dc54beddf3e6d58edbebc617ce9534d434c6247c95fbbd15"
+    sha256 cellar: :any, big_sur:  "e380b3f661ee5f9d18d8a155d34a2f329627af7f52d091058876bff7af1587c9"
+  end
+
   depends_on "gcc@11"
   depends_on "git"
   depends_on "go@1.16"
