@@ -69,10 +69,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
-      - name: Debug with ssh
-        uses: mxschmitt/action-tmate@v3
-      - name: Install gh
-        run: brew install gh
+      # - name: Debug with ssh
+      #   uses: mxschmitt/action-tmate@v3
+      - name: Setup Working Dir
+        run: |-
+          mkdir /usr/local/Homebrew/Library/Tap/wearedevx/
+          ln -s $PWD /usr/local/Homebrew/Library/Tap/wearedevx/homebrew-keystone
       - name: Install as bottle
         run: |-
           brew update
@@ -110,8 +112,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
-      - name: Install gh
-        run: brew install gh
+      - name: Setup Working Dir
+        run: |-
+          mkdir /usr/local/Homebrew/Library/Tap/wearedevx/
+          ln -s $PWD /usr/local/Homebrew/Library/Tap/wearedevx/homebrew-keystone
       - name: Install as bottle
         run: |-
           brew update
