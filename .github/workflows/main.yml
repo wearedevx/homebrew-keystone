@@ -73,8 +73,8 @@ jobs:
       #   uses: mxschmitt/action-tmate@v3
       - name: Setup Working Dir
         run: |-
-          mkdir /usr/local/Homebrew/Library/Tap/wearedevx/
-          ln -s $PWD /usr/local/Homebrew/Library/Tap/wearedevx/homebrew-keystone
+          mkdir /usr/local/Homebrew/Library/Taps/wearedevx/
+          ln -s $PWD /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
       - name: Install as bottle
         run: |-
           brew update
@@ -114,8 +114,8 @@ jobs:
           ref: master
       - name: Setup Working Dir
         run: |-
-          mkdir /usr/local/Homebrew/Library/Tap/wearedevx/
-          ln -s $PWD /usr/local/Homebrew/Library/Tap/wearedevx/homebrew-keystone
+          mkdir /usr/local/Homebrew/Library/Taps/wearedevx/
+          ln -s $PWD /usr/local/Homebrew/Library/Taps/wearedevx/homebrew-keystone
       - name: Install as bottle
         run: |-
           brew update
