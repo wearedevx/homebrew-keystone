@@ -117,11 +117,10 @@ jobs:
         run: |-
           gh release download --clobber ${{env.TAG}}
           brew tap wearedevx/keystone
-          brew install -s wearedevx/keystone/keystone
 
           echo 'echo "\n\n[ci skip]" >> "$1"' > .git/hooks/commit-msg; chmod +x .git/hooks/commit-msg
           if ls *{.json,.tar.gz}; then
-            brew test-bot --git-name ci --git-email ci@wearedevx.com --publish ./Formula/keystone.rb
+            brew test-bot --git-name ci --git-email ci@wearedevx.com --publish --testing-formulae wearedevx/keystone/keystone
           else
             echo "===> No bottles found to publish";
           fi
