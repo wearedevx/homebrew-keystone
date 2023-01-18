@@ -82,7 +82,7 @@ jobs:
             --skip-online-checks \
             --skip-livecheck \
             --tap wearedevx/homebrew-keystone \
-            --testing-formulae wearedevx/keystone/keytone \
+            --testing-formulae wearedevx/keystone/keystone \
             wearedevx/keystone/keystone
           git add Formula/keystone.rb
           git commit --author "CI <ci@wearedevx.com>" -m "Release 0.2.47 ${{ runner.os }}"
@@ -119,7 +119,7 @@ jobs:
             --skip-online-checks \
             --skip-livecheck \
             --tap wearedevx/homebrew-keystone \
-            --testing-formulae wearedevx/keystone/keytone \
+            --testing-formulae wearedevx/keystone/keystone \
             wearedevx/keystone/keystone
           git add Formula/keystone.rb
           git commit --author "CI <ci@wearedevx.com>" -m "Release 0.2.47 runner.os"
