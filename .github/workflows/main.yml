@@ -86,8 +86,9 @@ jobs:
             wearedevx/keystone/keystone
       - name: Git push
         run: |-
-          Git push git add Formula/keystone.rb git commit --allow-empty --author
-          "CI <ci@wearedevx.com>" -m "Release 0.2.47 runner.os" git push
+          git add Formula/keystone.rb
+          git commit --allow-empty --author "CI <ci@wearedevx.com>" -m "Release 0.2.47 ${{ runner.os }}"
+          git push
       - name: Release upload
         uses: ncipollo/release-action@v1
         with:
@@ -124,10 +125,8 @@ jobs:
             wearedevx/keystone/keystone
       - name: Git push
         run: |-
-          Git push git add Formula/keystone.rb git commit --allow-empty --author
-          "CI <ci@wearedevx.com>" -m "Release 0.2.47 runner.os" git push
           git add Formula/keystone.rb
-          git commit --allow-empty --author "CI <ci@wearedevx.com>" -m "Release 0.2.47 runner.os"
+          git commit --allow-empty --author "CI <ci@wearedevx.com>" -m "Release 0.2.47 ${{ runner.os }}"
           git push
       - name: Release upload
         uses: ncipollo/release-action@v1
