@@ -93,7 +93,7 @@ jobs:
             --root-url https://github.com/wearedevx/homebrew-keystone/releases/download/${{env.TAG}} 
           if ls *.tar.gz; then
             for f in $(ls *.tar.gz); do
-              mv "$f" "$(echo $f | sed 's/--/-/g')
+              mv "$f" "$(echo $f | sed 's/--/-/g')"
             done
           fi
 
